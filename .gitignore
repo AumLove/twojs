@@ -1,0 +1,69 @@
+ <!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>行星</title>
+    <style>
+        svg,canvas {
+            background:#222 url("xy.jpg") no-repeat;
+
+        }
+        #box{
+            margin: 50px auto;
+            transform: rotateX(60deg);
+             width: 1000px;
+             height: 1000px;
+             /*background:url("xy.jpg") no-repeat;*/
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="js/two.js"></script>
+<script>
+    var two = new Two({
+        width: 1000,
+        height: 1000,
+        type: Two.Types.svg
+    }).appendTo(box);
+    var r1= two.makeCircle(0,0,100);
+    r1.fill = '#f00';
+    r1.stroke = 'transparent';
+    var r2 = two.makeCircle(200,200,50);
+    r2.fill = '#09f';
+    r2.stroke = 'transparent';
+    var r3 = two.makeCircle(0,0,200*Math.sqrt(2));
+    r3.fill = 'transparent';
+    r3.stroke = '#ccc';
+    var r6 = two.makeCircle(360,360,40);
+    r6.fill = '#FF5D00';
+    r6.stroke = 'transparent';
+    var r7 = two.makeCircle(0,0,360*Math.sqrt(2));
+    r7.fill = 'transparent';
+    r7.stroke = '#ccc';
+   // r3.lineWidth=1;
+    var r4= two.makeCircle(75,75,25);
+    r4.fill = '#FFFF00';
+    r4.stroke = 'transparent';
+    var r5 = two.makeCircle(0,0,75*Math.sqrt(2));
+    r5.fill = 'transparent';
+    r5.stroke = '#CDA572';
+    r5.linewidth=5;
+    var g1= two.makeGroup(r4,r5);
+    g1.translation.set(200,200);
+    ///////////
+    var g = two.makeGroup(r1,r2,r3,r6,r7,g1);
+    g.translation.set(500,500);
+    var deg = 10;
+    var deg1 = 1;
+    two.on('update', function(){
+        g.rotation = deg*Math.PI/180;
+        deg+=3;
+        g1.rotation = deg1*Math.PI/180;
+        deg1+=1;
+    });
+    two.play();//每秒钟调用60次two.update
+    two.update();
+</script>
+</body>
+</html>
